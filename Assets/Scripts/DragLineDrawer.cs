@@ -2,13 +2,12 @@
 using System.Collections;
 
 public class DragLineDrawer : MonoBehaviour {
-	public Color c0 = Color.green;
-	public Color c1 = Color.yellow;
-	public Color c2 = Color.red;
+	public Color green = Color.green;
+	public Color yellow = Color.yellow;
+	public Color red = Color.red;
 
 	private InputManager inputManager;
 	public LineRenderer lineRenderer;
-	private Camera camera;
 
 	private Vector3 startLine;
 	private Vector3 currentLine;
@@ -17,13 +16,10 @@ public class DragLineDrawer : MonoBehaviour {
 	private bool drawingLine;
 
 	void Start() {
-		camera = Camera.main;
 		inputManager = FindObjectOfType<InputManager> ();
 		drawingLine = false;
 		lineRenderer = GetComponent<LineRenderer>();
-//		lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-		lineRenderer.material.color = c2;
-		lineRenderer.SetColors(c2,c2);
+		lineRenderer.SetColors(green,green);
 		lineRenderer.SetWidth(0.2F, 0.2F);
 		lineRenderer.sortingLayerName = "Player";
 	}
@@ -34,8 +30,9 @@ public class DragLineDrawer : MonoBehaviour {
 		}
 
 		if (drawingLine && inputManager.dragging) {
-			currentLine = camera.ScreenToWorldPoint( new Vector3 (inputManager.currentDrag.x, inputManager.currentDrag.y, 2));
+			currentLine = Camera.main.ScreenToWorldPoint( new Vector3 (inputManager.currentDrag.x, inputManager.currentDrag.y, 2));
 			lineRenderer.SetPosition (1, currentLine);
+			LineColor ();
 		} 
 
 		if (inputManager.draggingFinished) {
@@ -46,8 +43,22 @@ public class DragLineDrawer : MonoBehaviour {
 
 	private void StartDrawingLine(){
 		lineRenderer.enabled = true;
-		startLine = camera.ScreenToWorldPoint( new Vector3 (inputManager.startDrag.x, inputManager.startDrag.y, 2));
+		startLine = Camera.main.ScreenToWorldPoint( new Vector3 (inputManager.startDrag.x, inputManager.startDrag.y, 2));
 		lineRenderer.SetPosition (0, startLine);
 		drawingLine = true;
+	}
+
+	private void LineColor(){
+		switch (inputManager.dragSize) {
+		case InputManager.DragSize.Short:
+			lineRenderer.SetColors(green,green);
+			break;
+		case InputManager.DragSize.Medium:
+			lineRenderer.SetColors(yellow,yellow);
+			break;
+		case InputManager.DragSize.Long:
+			lineRenderer.SetColors(red,red);
+			break;
+		}
 	}
 }
