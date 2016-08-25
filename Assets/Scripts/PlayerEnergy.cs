@@ -16,8 +16,17 @@ public class PlayerEnergy : MonoBehaviour {
 		if (maxEnergy <= 0) {
 			maxEnergy = 10;
 		}
+		isAlive = true;
 		energy = maxEnergy;
 		energySlider.maxValue = maxEnergy;
+	}
+
+	void Update(){
+		if (energy <= 0) {
+			energy = 0;
+			Debug.Log ("you dead sorry :(");
+			isAlive = false;
+		}
 		energySlider.value = energy;
 	}
 
@@ -26,10 +35,5 @@ public class PlayerEnergy : MonoBehaviour {
 		if (energy >= maxEnergy) {
 			energy = maxEnergy;
 		}
-		if (energy <= 0) {
-			Debug.Log ("you dead sorry :(");
-			isAlive = false;
-		}
-		energySlider.value = energy;
 	}
 }

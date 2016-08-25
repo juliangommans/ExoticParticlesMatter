@@ -8,7 +8,7 @@ public class SpeedBoostPanel : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D other){
 		if (other != null && other.name == "Player") { // might allow other objects to get wizzed away later
-			other.gameObject.GetComponent<PlayerMovement> ().MovePlayer (direction.normalized, speed);
+			other.GetComponent<PlayerMovement> ().MovePlayer (direction.normalized, speed);
 		}
 		
 	}

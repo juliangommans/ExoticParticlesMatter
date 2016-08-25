@@ -5,6 +5,7 @@ public class DragLineDrawer : MonoBehaviour {
 	public Color green = Color.green;
 	public Color yellow = Color.yellow;
 	public Color red = Color.red;
+	public Color gray = Color.gray;
 
 	private InputManager inputManager;
 	public LineRenderer lineRenderer;
@@ -50,6 +51,9 @@ public class DragLineDrawer : MonoBehaviour {
 
 	private void LineColor(){
 		switch (inputManager.dragSize) {
+		case InputManager.DragSize.Cancel:
+			lineRenderer.SetColors (gray, gray);
+			break;
 		case InputManager.DragSize.Short:
 			lineRenderer.SetColors(green,green);
 			break;

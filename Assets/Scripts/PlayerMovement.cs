@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-		if (inputManager.draggingFinished){
+		if (inputManager.draggingFinished && playerEnergy.isAlive && inputManager.dragSize != InputManager.DragSize.Cancel){
 			forceOutput = inputManager.distance * forceFactor;
 			MovePlayer(inputManager.direction, forceOutput);
 			CalculateCost ();
@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void CalculateCost () {
 		switch (inputManager.dragSize) {
+			case InputManager.DragSize.Cancel:
+				cost = 0;
+				break;
 			case InputManager.DragSize.Short:
 				cost = 1;
 				break;
@@ -52,8 +55,6 @@ public class PlayerMovement : MonoBehaviour {
 				cost = 3;
 				break;
 		}
-		Debug.Log ("Cost: " + cost);
-		Debug.Log ("---------------------");
 		playerEnergy.ChangeEnergy (-cost);
 	}
 }

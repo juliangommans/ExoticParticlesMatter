@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour {
 	public Vector2 currentDrag;
 
 	public float distance;
-	private int roundedDistance;
+	private float factoredDistance;
 	private float holdingForDrag;
 
 	public bool dragging;
@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour {
 
 	public enum DragSize
 	{
+		Cancel,
 		Short,
 		Medium,
 		Long
@@ -65,12 +66,14 @@ public class InputManager : MonoBehaviour {
 	}
 
 	private void ManageEnum(){
-		roundedDistance = (int)Mathf.Round (Vector2.Distance (startDrag, currentDrag) / 100);
-		if (roundedDistance < 3) {
+		factoredDistance = Vector2.Distance (startDrag, currentDrag) / 100;
+		if (factoredDistance < 0.1f) {
+			dragSize = DragSize.Cancel;
+		} else if (factoredDistance >= 0.1f && factoredDistance < 3f) {
 			dragSize = DragSize.Short;
-		} else if (roundedDistance >= 3 && roundedDistance < 6) {
+		} else if (factoredDistance >= 3f && factoredDistance < 6f) {
 			dragSize = DragSize.Medium;
-		} else if (roundedDistance >= 6) {
+		} else if (factoredDistance >= 6f) {
 			dragSize = DragSize.Long;
 		}
 	}
