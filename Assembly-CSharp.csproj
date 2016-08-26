@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\DragLineDrawer.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\EnergyTrap.cs" />
+     <Compile Include="Assets\Scripts\GroundTriggers\GravityWell.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\SpeedBoostPanel.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\PlayerEnergy.cs" />
