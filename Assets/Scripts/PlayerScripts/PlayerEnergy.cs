@@ -8,14 +8,17 @@ public class PlayerEnergy : MonoBehaviour {
 	public int maxEnergy;
 	public Slider energySlider;
 
+	private PlayerAuxillaryParticles playerBuffs;
+
 	public bool isAlive;
+	public bool shielded;
 
-	public GameObject[] subAtomicParticles;
-
-	void Start(){
+	void Awake(){
+		playerBuffs = this.GetComponent<PlayerAuxillaryParticles> ();
 		if (maxEnergy <= 0) {
 			maxEnergy = 10;
 		}
+		shielded = false;
 		isAlive = true;
 		energy = maxEnergy;
 		energySlider.maxValue = maxEnergy;
@@ -30,10 +33,14 @@ public class PlayerEnergy : MonoBehaviour {
 		energySlider.value = energy;
 	}
 
-	public void ChangeEnergy(int amount){
-		energy += amount;
-		if (energy >= maxEnergy) {
-			energy = maxEnergy;
+	public void ChangeEnergy(int amount, string source){
+		if (shielded && source == "Damage") {
+			playerBuffs.RemoveShield ();
+		} else {
+			energy += amount;
+			if (energy >= maxEnergy) {
+				energy = maxEnergy;
+			}
 		}
 	}
 }

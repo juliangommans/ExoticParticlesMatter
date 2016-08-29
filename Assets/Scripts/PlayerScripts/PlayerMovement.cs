@@ -55,6 +55,6 @@ public class PlayerMovement : MonoBehaviour {
 				cost = 3;
 				break;
 		}
-		playerEnergy.ChangeEnergy (-cost);
+		playerEnergy.ChangeEnergy (-cost, "PlayerAction");
 	}
 }

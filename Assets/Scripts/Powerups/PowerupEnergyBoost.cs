@@ -10,6 +10,6 @@ public class PowerupEnergyBoost : PowerupBase {
 	}
 	
 	public override void PowerupAction(GameObject player){
-		player.GetComponent<PlayerEnergy> ().ChangeEnergy(value);
+		player.GetComponent<PlayerEnergy> ().ChangeEnergy(value, "Boost");
 	}
 }
