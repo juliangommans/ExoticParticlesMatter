@@ -3,22 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerBuffManager : MonoBehaviour {
+
+	public GameObject fetchedBuff;
 	
-	public GameObject FindUnoccupiedBuff () {
-		for ( int i = this.transform.childCount; i <= 0; i--){
-			Debug.Log ("how many times do we go round?" + i);
+	public void FindUnoccupiedBuff () {
+		for ( int i = 0; i <  this.transform.childCount; i++){
 			GameObject buff = this.transform.GetChild (i).gameObject;
-			if (buff != null && !buff.GetComponent<PlayerBuff>().occupied){
-				return buff;
+			if (buff != null && !buff.GetComponent<PlayerBuff> ().occupied) {
+				fetchedBuff = buff;
+				break;
 			}
 		}
 	}
 
-	public GameObject FindOccupiedBuff (string stringId){
-		for (int i = this.transform.childCount; i <= 0; i--) {
+	public void FindOccupiedBuff (string stringId){
+		for ( int i = 0; i <  this.transform.childCount; i++) {
 			GameObject buff = this.transform.GetChild (i).gameObject;
 			if (buff != null && buff.GetComponent<PlayerBuff> ().occupied && buff.GetComponent<PlayerBuff> ().occupant == stringId) {
-				return buff;
+				fetchedBuff = buff;
+				break;
 			}
 		}
 	}

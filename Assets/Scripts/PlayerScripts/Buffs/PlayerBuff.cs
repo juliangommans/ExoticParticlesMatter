@@ -8,11 +8,7 @@ public class PlayerBuff : MonoBehaviour {
 	private SpriteRenderer image;
 
 	void Awake (){
-		occupied = false;
-		image = GetComponent<SpriteRenderer> ();
-		if (image.enabled) {
-			image.enabled = false;
-		}
+		EmptyBuffSlot ();
 	}
 
 	public void OccupyBuffSlot (AuxillaryBase buff){
@@ -23,6 +19,12 @@ public class PlayerBuff : MonoBehaviour {
 	}
 
 	public void EmptyBuffSlot (){
-
-	}
+		occupied = false;
+		image = GetComponent<SpriteRenderer> ();
+		image.color = Color.white;
+		if (image.enabled) {
+			image.enabled = false;
+		}
+		occupant = null;
+	}	
 }

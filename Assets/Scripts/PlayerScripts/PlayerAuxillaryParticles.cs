@@ -11,6 +11,8 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 	private PlayerEnergy pEnergy;
 	private PlayerBuffManager pBuffs;
 
+	private GameObject p; // just incase its necesary
+
 	private List<GameObject> currentParticles;
 
 	void Awake () {
@@ -27,7 +29,8 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 		Debug.Log (particle);
 		if (particle != null && particles < maxParticles) {
 			particles += value;
-			GameObject p = pBuffs.FindUnoccupiedBuff ();
+			pBuffs.FindUnoccupiedBuff ();
+			GameObject p = pBuffs.fetchedBuff;
 			p.GetComponent<PlayerBuff> ().OccupyBuffSlot (particle);
 			currentParticles.Add(p);
 		}
@@ -38,26 +41,27 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 
 	public void RemoveShield (){
 		RemoveParticle (FindParticle("shield"));
-		AuxillaryBase p = FindParticle("shield");
+		GameObject p = FindParticle("shield");
 		if (p == null) {
 			pEnergy.shielded = false;
 		}
 	}
 
-	public void RemoveParticle (AuxillaryBase p){
-		Debug.Log ("what have we here (buffs): " + p);
-		if (p != null){
+	public void RemoveParticle (GameObject pb){
+		Debug.Log ("what have we here (buffs): " + pb);
+		if (pb != null){
+			particles -= 1;
+			pBuffs.FindOccupiedBuff (pb.GetComponent<PlayerBuff>().occupant);
+			GameObject p = pBuffs.fetchedBuff;
+			p.GetComponent<PlayerBuff> ().EmptyBuffSlot ();
 			currentParticles.Remove (p);
 		}
 	}
 
-	private AuxillaryBase FindParticle (string id){
+	private GameObject FindParticle (string id){
 		Debug.Log ("currentParticles: " + currentParticles.Count);
-		foreach (AuxillaryBase x in currentParticles) {
-			Debug.Log ("what is this? " + x);
-			Debug.Log (x.stringId);
-		}
-		AuxillaryBase p = GameObject.Find(obj => string.Equals(obj.stringId, "shield"));
+		GameObject p = currentParticles.Find(obj => string.Equals(obj.GetComponent<PlayerBuff>().occupant, id));
+
 		Debug.Log ("string", p);
 		return p;
 	}
