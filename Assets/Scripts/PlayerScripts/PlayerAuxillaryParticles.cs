@@ -12,6 +12,9 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 
 	private GameObject p; // just incase its necesary
 
+	private int shieldCount;
+	private int hasteCount;
+
 	void Awake () {
 		pEnergy = this.GetComponent<PlayerEnergy> ();
 		pMovement = this.GetComponent<PlayerMovement> ();
@@ -29,8 +32,8 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 			GameObject p = pBuffs.fetchedBuff;
 			// After PlayerBuffManager has found and retreived a free slot, we occupy it with this particles data
 			p.GetComponent<PlayerBuff> ().OccupyBuffSlot (particle);
+			ApplyBuffsToPlayer (particle);
 		}
-		ApplyBuffsToPlayer (particle);
 		if (particles == maxParticles) {
 			pBuffs.full = true;
 		}
@@ -40,43 +43,71 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 		switch (particle.stringId) {
 		case "shield":
 			pEnergy.shielded = true;
+			shieldCount += 1;
 			break;
-		case "speed":
-			pMovement.speedBuffs += particle.amount;
+		case "haste":
+			pMovement.ChangeSpeedBuff (particle.amount);
+			hasteCount += 1;
 			break;
 		}
 	}
 
 	public void RemoveShield (){
-		RemoveParticle ("shield");
-		// This checks if there are any other shields hanging around, if not - disable shielding for player
-		GameObject p = pBuffs.FindOccupiedBuff ("shield");
-		if (p == null) {
+		Debug.Log ("checking the shield counts = " + shieldCount);
+	// This checks if there are any other shields hanging around, if not - disable shielding for player
+		if (shieldCount <= 0) {
 			pEnergy.shielded = false;
 		}
+	}
+
+	public void RemoveHaste (GameObject p){
+		pMovement.ChangeSpeedBuff(-p.GetComponent<PlayerBuff> ().amount);
 	}
 
 	public void RemoveParticle (string id){
 		if (id != null){
 			particles -= 1;
 			GameObject p = pBuffs.FindOccupiedBuff (id);
+			ParticleSpecificCleanup (p, id);
 			p.GetComponent<PlayerBuff> ().EmptyBuffSlot ();
 			pBuffs.full = false;
 		}
 	}
 
+	private void ParticleSpecificCleanup (GameObject p, string id){
+		if (id != null && p!= null) {
+			switch (id) {
+			case "shield":
+				shieldCount -= 1;
+				RemoveShield();
+				break;
+			case "haste":
+				hasteCount -= 1;
+				RemoveHaste(p);
+				break;
+			}
+		}
+	}
+
 	// Should get this working asap
-//	public void UseBuffs () {
-//		for (int i = 0; i < particles; i++ ){
-//			GameObject p = pBuffs.GetBuffByInt (i);
-//			switch (p) {
-//			case "shield":
-//				pEnergy = ;
-//				break;
-//			case "speed":
-//				pMovement.speedBuffs += particle.amount;
-//				break;
-//			}
-//		}
-//	}
+	public void UseBuffs () {
+		if (shieldCount > 0) {
+			GameObject p = pBuffs.FindOccupiedBuff ("shield");
+			StartCoroutine (pEnergy.Invulnerability (shieldCount * p.GetComponent<PlayerBuff> ().amount));
+			int counter = shieldCount;
+			for (int i = 0; i < counter; i++) {
+				RemoveParticle ("shield");
+			}
+		}
+		if (hasteCount > 0) {
+			GameObject p = pBuffs.FindOccupiedBuff ("haste");
+			float speed = hasteCount * p.GetComponent<PlayerBuff> ().amount * 40f;
+			pMovement.SpeedBoost (speed);
+			int counter = hasteCount;
+			for (int i = 0; i < counter; i++) {
+				RemoveParticle ("haste");
+			}
+		}
+
+	}
 }

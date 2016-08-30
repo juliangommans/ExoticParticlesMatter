@@ -5,6 +5,7 @@ public class PlayerBuff : MonoBehaviour {
 
 	public bool occupied;
 	public string occupant;
+	public float amount;
 	private SpriteRenderer image;
 
 	void Awake (){
@@ -16,6 +17,7 @@ public class PlayerBuff : MonoBehaviour {
 		image.enabled = true;
 		image.color = buff.color;
 		occupied = true;
+		amount = buff.amount;
 	}
 
 	public void EmptyBuffSlot (){
@@ -25,6 +27,7 @@ public class PlayerBuff : MonoBehaviour {
 		if (image.enabled) {
 			image.enabled = false;
 		}
+		amount = 0f;
 		occupant = null;
 	}
 }

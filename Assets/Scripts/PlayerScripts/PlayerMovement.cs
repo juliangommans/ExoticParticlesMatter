@@ -42,6 +42,14 @@ public class PlayerMovement : MonoBehaviour {
 		playerRb.AddForce (direction * speed);
 	}
 
+	public void SpeedBoost (float speed){
+		playerRb.velocity = inputManager.direction * speed;
+	}
+
+	public void ChangeSpeedBuff (float amount) {
+		speedBuffs += amount; 
+	}
+
 	private void CalculateCost () {
 		switch (inputManager.dragSize) {
 			case InputManager.DragSize.Cancel:

@@ -4,9 +4,9 @@ using System.Collections;
 public class BlueAuxillaryParticle : AuxillaryBase {
 
 	void Awake (){
+		amount = 1.5f;
 		value = 1;
 		stringId = "shield";
-//		color = Color.blue;
 		powerupName = "Blue Auxillary Particle";
 	}
 		

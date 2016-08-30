@@ -6,8 +6,7 @@ public class YellowAuxillaryParticle : AuxillaryBase {
 	void Awake (){
 		amount = 0.3f;
 		value = 1;
-		stringId = "speed";
-//		color = Color.yellow;
+		stringId = "haste";
 		powerupName = "Blue Auxillary Particle";
 	}
 		

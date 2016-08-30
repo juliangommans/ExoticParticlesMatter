@@ -8,13 +8,20 @@ public class InputManager : MonoBehaviour {
 	public Vector2 direction;
 	public Vector2 currentDrag;
 
+	private PlayerAuxillaryParticles pAux;
+
 	public float distance;
+	private float distanceCap;
 	private float factoredDistance;
 	private float holdingForDrag;
+
+	private float doubleTapTimer;
 
 	public bool dragging;
 	public bool draggingEnabled;
 	public bool draggingFinished;
+
+	public bool doubleTapEnabled;
 
 	public enum DragSize
 	{
@@ -28,11 +35,17 @@ public class InputManager : MonoBehaviour {
 	void Start () {
 		dragSize = DragSize.Short;
 		draggingEnabled = true;
+		pAux = FindObjectOfType<PlayerAuxillaryParticles> ();
+		distanceCap = 620f;
 	}
 
 	void Update () {
 		ManageInputs();
 		ManageEnum ();
+		if (doubleTapEnabled) {
+			Debug.Log ("doubleTapTimer is true");
+			doubleTapTimer += Time.deltaTime;
+		}
 	}
 
 	private void ManageInputs(){
@@ -48,6 +61,15 @@ public class InputManager : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0)){
 			startDrag = new Vector2(Input.mousePosition.x,Input.mousePosition.y);
+			if (doubleTapEnabled && doubleTapTimer <= 0.35f) {
+				Debug.Log("triggered the PlayerBuff");
+				pAux.UseBuffs ();
+				doubleTapEnabled = false;
+			}
+			if (!doubleTapEnabled) {
+				doubleTapEnabled = true;
+			}
+			doubleTapTimer = 0f;
 		}
 
 		if (Input.GetMouseButtonUp (0) && dragging) {
@@ -59,20 +81,23 @@ public class InputManager : MonoBehaviour {
 			endDrag = currentDrag;
 			direction = (startDrag - endDrag).normalized;
 			distance = Vector2.Distance (startDrag, endDrag);
+			if (distance >= distanceCap){
+				distance = distanceCap;
+			}
+			Debug.Log ("distance" + distance);
 			draggingFinished = true;
 		}
-
 	}
 
 	private void ManageEnum(){
 		factoredDistance = Vector2.Distance (startDrag, currentDrag) / 100;
-		if (factoredDistance < 0.1f) {
+		if (factoredDistance < 0.12f) {
 			dragSize = DragSize.Cancel;
-		} else if (factoredDistance >= 0.1f && factoredDistance < 3f) {
+		} else if (factoredDistance >= 0.12f && factoredDistance < 2.25f) {
 			dragSize = DragSize.Short;
-		} else if (factoredDistance >= 3f && factoredDistance < 6f) {
+		} else if (factoredDistance >= 2.25f && factoredDistance < 4.5f) {
 			dragSize = DragSize.Medium;
-		} else if (factoredDistance >= 6f) {
+		} else if (factoredDistance >= 4.5f) {
 			dragSize = DragSize.Long;
 		}
 	}

@@ -39,18 +39,23 @@ public class PlayerEnergy : MonoBehaviour {
 	// This isn't being used but will be
 	public IEnumerator Invulnerability (float count){
 		invulnerable = true;
+		Debug.Log ("you are god");
 		yield return new WaitForSeconds (count);
+		Debug.Log ("you are sponge");
 		invulnerable = false;
-		
 	}
 
 	public void ChangeEnergy(int amount, string source){
 		if (shielded && source == "Damage") {
-			playerBuffs.RemoveShield ();
+			playerBuffs.RemoveParticle ("shield");
 		} else {
-			energy += amount;
-			if (energy >= maxEnergy) {
-				energy = maxEnergy;
+			if (invulnerable && source == "Damage") {
+				//do nothing
+			}else{
+				energy += amount;
+				if (energy >= maxEnergy) {
+					energy = maxEnergy;
+				}
 			}
 		}
 	}
