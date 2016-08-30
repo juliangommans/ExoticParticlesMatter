@@ -26,5 +26,5 @@ public class PlayerBuff : MonoBehaviour {
 			image.enabled = false;
 		}
 		occupant = null;
-	}	
+	}
 }

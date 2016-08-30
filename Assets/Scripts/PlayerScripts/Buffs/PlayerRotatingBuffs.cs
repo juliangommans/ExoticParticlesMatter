@@ -4,11 +4,12 @@ using System.Collections;
 public class PlayerRotatingBuffs : MonoBehaviour {
 
 	public Transform center;
-	public float degreesPerSecond = -65.0f;
+	public float degreesPerSecond;
 
 	private Vector3 v;
 
 	void Start() {
+		degreesPerSecond = -360.0f;
 		v = transform.position - center.position;
 	}
 

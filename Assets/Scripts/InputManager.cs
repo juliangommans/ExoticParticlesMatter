@@ -59,7 +59,6 @@ public class InputManager : MonoBehaviour {
 			endDrag = currentDrag;
 			direction = (startDrag - endDrag).normalized;
 			distance = Vector2.Distance (startDrag, endDrag);
-			Debug.Log ("EndDrag: " + endDrag);
 			draggingFinished = true;
 		}
 

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	private float forceOutput;
 	public float forceFactor;
+	public float speedBuffs;
 
 	private int cost;
 
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 		playerEnergy = this.GetComponent<PlayerEnergy>();
 		playerRb = this.GetComponent<Rigidbody2D>();
 		forceFactor = 2f;
+		speedBuffs = 1f;
 	}
 
 	void Update () {
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void LateUpdate () {
 		if (inputManager.draggingFinished && playerEnergy.isAlive && inputManager.dragSize != InputManager.DragSize.Cancel){
-			forceOutput = inputManager.distance * forceFactor;
+			forceOutput = inputManager.distance * forceFactor * speedBuffs;
 			MovePlayer(inputManager.direction, forceOutput);
 			CalculateCost ();
 		}

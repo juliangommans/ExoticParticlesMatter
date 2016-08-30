@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PowerupBase : MonoBehaviour {
 
+	public bool destructable = true;
 	public bool powerupTriggered; // maybe not necesarry
 	public string powerupName;
 	public int value;
@@ -11,7 +12,9 @@ public class PowerupBase : MonoBehaviour {
 		if (other != null && other.name == "Player") {
 			powerupTriggered = true;
 			PowerupAction(other.gameObject);
-			Destroy(this.gameObject);
+			if (destructable) {
+				Destroy (this.gameObject);
+			}
 			// maybe play a 'pop' animation e.g. PlayAnimation();
 		}
 	}

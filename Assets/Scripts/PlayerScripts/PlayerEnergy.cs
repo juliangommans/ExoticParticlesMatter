@@ -12,12 +12,16 @@ public class PlayerEnergy : MonoBehaviour {
 
 	public bool isAlive;
 	public bool shielded;
+	public bool invulnerable;
+	public int invulnerableDur;
 
 	void Awake(){
 		playerBuffs = this.GetComponent<PlayerAuxillaryParticles> ();
 		if (maxEnergy <= 0) {
 			maxEnergy = 10;
 		}
+		invulnerableDur = 0;
+		invulnerable = false;
 		shielded = false;
 		isAlive = true;
 		energy = maxEnergy;
@@ -31,6 +35,13 @@ public class PlayerEnergy : MonoBehaviour {
 			isAlive = false;
 		}
 		energySlider.value = energy;
+	}
+	// This isn't being used but will be
+	public IEnumerator Invulnerability (float count){
+		invulnerable = true;
+		yield return new WaitForSeconds (count);
+		invulnerable = false;
+		
 	}
 
 	public void ChangeEnergy(int amount, string source){

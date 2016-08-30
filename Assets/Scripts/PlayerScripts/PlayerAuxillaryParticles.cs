@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class PlayerAuxillaryParticles : MonoBehaviour {
 
@@ -13,11 +12,7 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 
 	private GameObject p; // just incase its necesary
 
-	private List<GameObject> currentParticles;
-
 	void Awake () {
-		
-		currentParticles = new List<GameObject> ();
 		pEnergy = this.GetComponent<PlayerEnergy> ();
 		pMovement = this.GetComponent<PlayerMovement> ();
 		pBuffs = this.GetComponent<PlayerBuffManager> ();
@@ -26,44 +21,62 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 	}
 		
 	public void AddParticle(int value, AuxillaryBase particle){
-		Debug.Log (particle);
+		// When a player hit's an Auxillary Particle object this triggers
 		if (particle != null && particles < maxParticles) {
 			particles += value;
+			// Uses PlayerBuffManager to find a free buff slot
 			pBuffs.FindUnoccupiedBuff ();
 			GameObject p = pBuffs.fetchedBuff;
+			// After PlayerBuffManager has found and retreived a free slot, we occupy it with this particles data
 			p.GetComponent<PlayerBuff> ().OccupyBuffSlot (particle);
-			currentParticles.Add(p);
 		}
-		if (particle.stringId == "shield") {
+		ApplyBuffsToPlayer (particle);
+		if (particles == maxParticles) {
+			pBuffs.full = true;
+		}
+	}
+
+	private void ApplyBuffsToPlayer (AuxillaryBase particle){
+		switch (particle.stringId) {
+		case "shield":
 			pEnergy.shielded = true;
+			break;
+		case "speed":
+			pMovement.speedBuffs += particle.amount;
+			break;
 		}
 	}
 
 	public void RemoveShield (){
-		RemoveParticle (FindParticle("shield"));
-		GameObject p = FindParticle("shield");
+		RemoveParticle ("shield");
+		// This checks if there are any other shields hanging around, if not - disable shielding for player
+		GameObject p = pBuffs.FindOccupiedBuff ("shield");
 		if (p == null) {
 			pEnergy.shielded = false;
 		}
 	}
 
-	public void RemoveParticle (GameObject pb){
-		Debug.Log ("what have we here (buffs): " + pb);
-		if (pb != null){
+	public void RemoveParticle (string id){
+		if (id != null){
 			particles -= 1;
-			pBuffs.FindOccupiedBuff (pb.GetComponent<PlayerBuff>().occupant);
-			GameObject p = pBuffs.fetchedBuff;
+			GameObject p = pBuffs.FindOccupiedBuff (id);
 			p.GetComponent<PlayerBuff> ().EmptyBuffSlot ();
-			currentParticles.Remove (p);
+			pBuffs.full = false;
 		}
 	}
 
-	private GameObject FindParticle (string id){
-		Debug.Log ("currentParticles: " + currentParticles.Count);
-		GameObject p = currentParticles.Find(obj => string.Equals(obj.GetComponent<PlayerBuff>().occupant, id));
-
-		Debug.Log ("string", p);
-		return p;
-	}
-
+	// Should get this working asap
+//	public void UseBuffs () {
+//		for (int i = 0; i < particles; i++ ){
+//			GameObject p = pBuffs.GetBuffByInt (i);
+//			switch (p) {
+//			case "shield":
+//				pEnergy = ;
+//				break;
+//			case "speed":
+//				pMovement.speedBuffs += particle.amount;
+//				break;
+//			}
+//		}
+//	}
 }
