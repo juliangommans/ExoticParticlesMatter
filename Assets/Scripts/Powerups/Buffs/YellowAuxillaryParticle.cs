@@ -7,7 +7,7 @@ public class YellowAuxillaryParticle : AuxillaryBase {
 		amount = 0.3f;
 		value = 1;
 		stringId = "haste";
-		powerupName = "Blue Auxillary Particle";
+		powerupName = "Yellow Auxillary Particle";
 	}
 		
 	public override void PowerupAction(GameObject player){

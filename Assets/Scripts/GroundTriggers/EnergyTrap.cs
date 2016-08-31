@@ -7,15 +7,15 @@ public class EnergyTrap : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll){
 		if (coll != null && coll.name == "Player") {
-			other = coll;
-			StartCoroutine ("StopTheBall");
+			StartCoroutine (StopTheBall(coll));
 		}
 	}
 
-	private IEnumerator StopTheBall(){
+	private IEnumerator StopTheBall(Collider2D other){
+		yield return new WaitForSeconds(0.03f);
 		other.attachedRigidbody.velocity = Vector3.zero;
 		other.attachedRigidbody.angularVelocity = 0f;
 		other.GetComponent<PlayerEnergy> ().energy = 0;
-		yield return new WaitForSeconds(.1f);
+		other.GetComponent<PlayerEnergy> ().ableToRegen = false;
 	}
 }

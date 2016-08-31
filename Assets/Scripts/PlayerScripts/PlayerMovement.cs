@@ -33,8 +33,25 @@ public class PlayerMovement : MonoBehaviour {
 	void LateUpdate () {
 		if (inputManager.draggingFinished && playerEnergy.isAlive && inputManager.dragSize != InputManager.DragSize.Cancel){
 			forceOutput = inputManager.distance * forceFactor * speedBuffs;
-			MovePlayer(inputManager.direction, forceOutput);
 			CalculateCost ();
+			if (cost > playerEnergy.energy) {
+				CalculateNewMotion ();
+				Debug.Log ("shit costs yo " + cost);
+				Debug.Log ("energy? " + playerEnergy.energy);
+			}
+			MovePlayer (inputManager.direction, forceOutput);
+			playerEnergy.ChangeEnergy (-cost, "PlayerAction");
+		}
+	}
+
+	private void CalculateNewMotion (){
+		switch (playerEnergy.energy) {
+			case 1:
+				forceOutput = 225f;
+				break;
+			case 2:
+				forceOutput = 450f;
+				break;
 		}
 	}
 
@@ -42,8 +59,11 @@ public class PlayerMovement : MonoBehaviour {
 		playerRb.AddForce (direction * speed);
 	}
 
-	public void SpeedBoost (float speed){
-		playerRb.velocity = inputManager.direction * speed;
+	public void SpeedBoost (Vector2 direction, float speed){
+		if (direction == Vector2.zero){
+			direction = inputManager.direction;
+		}
+		playerRb.velocity = direction * speed;
 	}
 
 	public void ChangeSpeedBuff (float amount) {
@@ -65,6 +85,5 @@ public class PlayerMovement : MonoBehaviour {
 				cost = 3;
 				break;
 		}
-		playerEnergy.ChangeEnergy (-cost, "PlayerAction");
 	}
 }

@@ -45,12 +45,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\DragLineDrawer.cs" />
      <Compile Include="Assets\Scripts\Enemies\Bomb.cs" />
+     <Compile Include="Assets\Scripts\GameManageScripts\DragLineDrawer.cs" />
+     <Compile Include="Assets\Scripts\GameManageScripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\EnergyTrap.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\GravityWell.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\SpeedBoostPanel.cs" />
-     <Compile Include="Assets\Scripts\InputManager.cs" />
+     <Compile Include="Assets\Scripts\LevelScripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\Buffs\PlayerBuff.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\Buffs\PlayerRotatingBuffs.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAuxillaryParticles.cs" />
@@ -59,6 +60,7 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Powerups\Buffs\AuxillaryBase.cs" />
      <Compile Include="Assets\Scripts\Powerups\Buffs\BlueAuxillaryParticle.cs" />
+     <Compile Include="Assets\Scripts\Powerups\Buffs\PinkAuxillaryParticle.cs" />
      <Compile Include="Assets\Scripts\Powerups\Buffs\YellowAuxillaryParticle.cs" />
      <Compile Include="Assets\Scripts\Powerups\PowerupBase.cs" />
      <Compile Include="Assets\Scripts\Powerups\PowerupEnergyBoost.cs" />

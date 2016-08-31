@@ -4,7 +4,7 @@ using System.Collections;
 public class Bomb : PowerupBase {
 
 	void Awake () {
-		value = -1;
+		value = -2;
 		powerupName = "BOMB";
 	}
 

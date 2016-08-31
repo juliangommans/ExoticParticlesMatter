@@ -14,6 +14,7 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 
 	private int shieldCount;
 	private int hasteCount;
+	private int regenCount;
 
 	void Awake () {
 		pEnergy = this.GetComponent<PlayerEnergy> ();
@@ -32,6 +33,7 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 			GameObject p = pBuffs.fetchedBuff;
 			// After PlayerBuffManager has found and retreived a free slot, we occupy it with this particles data
 			p.GetComponent<PlayerBuff> ().OccupyBuffSlot (particle);
+			// Now we actually apply the buff effects to the player
 			ApplyBuffsToPlayer (particle);
 		}
 		if (particles == maxParticles) {
@@ -49,11 +51,14 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 			pMovement.ChangeSpeedBuff (particle.amount);
 			hasteCount += 1;
 			break;
+		case "regen":
+			pEnergy.ChangeRegenTimer (-particle.amount);
+			regenCount += 1;
+			break;
 		}
 	}
 
 	public void RemoveShield (){
-		Debug.Log ("checking the shield counts = " + shieldCount);
 	// This checks if there are any other shields hanging around, if not - disable shielding for player
 		if (shieldCount <= 0) {
 			pEnergy.shielded = false;
@@ -64,10 +69,15 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 		pMovement.ChangeSpeedBuff(-p.GetComponent<PlayerBuff> ().amount);
 	}
 
+	public void RemoveRegen(GameObject p){
+		pEnergy.ChangeRegenTimer (p.GetComponent<PlayerBuff> ().amount);
+	}
+
 	public void RemoveParticle (string id){
 		if (id != null){
 			particles -= 1;
 			GameObject p = pBuffs.FindOccupiedBuff (id);
+			// Yields to particle switch to handle individual particles differently
 			ParticleSpecificCleanup (p, id);
 			p.GetComponent<PlayerBuff> ().EmptyBuffSlot ();
 			pBuffs.full = false;
@@ -85,11 +95,15 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 				hasteCount -= 1;
 				RemoveHaste(p);
 				break;
+			case "regen":
+				regenCount -= 1;
+				RemoveRegen(p);
+				break;
 			}
 		}
 	}
 
-	// Should get this working asap
+	// When a player double taps, uses all current buffs for a certain effect.
 	public void UseBuffs () {
 		if (shieldCount > 0) {
 			GameObject p = pBuffs.FindOccupiedBuff ("shield");
@@ -102,10 +116,18 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 		if (hasteCount > 0) {
 			GameObject p = pBuffs.FindOccupiedBuff ("haste");
 			float speed = hasteCount * p.GetComponent<PlayerBuff> ().amount * 40f;
-			pMovement.SpeedBoost (speed);
+			pMovement.SpeedBoost (Vector2.zero, speed);
 			int counter = hasteCount;
 			for (int i = 0; i < counter; i++) {
 				RemoveParticle ("haste");
+			}
+		}
+		if (regenCount > 0) {
+			GameObject p = pBuffs.FindOccupiedBuff ("regen");
+			pEnergy.ChangeEnergy (regenCount * 2, "buff");
+			int counter = regenCount;
+			for (int i = 0; i < counter; i++) {
+				RemoveParticle ("regen");
 			}
 		}
 
