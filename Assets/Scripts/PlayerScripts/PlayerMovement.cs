@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float forceOutput;
 	public float forceFactor;
 	public float speedBuffs;
+	public float defaultDrag;
 
 	private int cost;
 
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 		playerRb = this.GetComponent<Rigidbody2D>();
 		forceFactor = 2f;
 		speedBuffs = 1f;
+		defaultDrag = 0.75f;
 	}
 
 	void Update () {
@@ -61,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void SpeedBoost (Vector2 direction, float speed){
 		if (direction == Vector2.zero){
-			direction = inputManager.direction;
+			direction = playerRb.velocity;
 		}
 		playerRb.velocity = direction * speed;
 	}

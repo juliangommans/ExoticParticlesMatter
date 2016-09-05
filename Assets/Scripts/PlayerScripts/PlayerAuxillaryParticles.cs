@@ -115,7 +115,7 @@ public class PlayerAuxillaryParticles : MonoBehaviour {
 		}
 		if (hasteCount > 0) {
 			GameObject p = pBuffs.FindOccupiedBuff ("haste");
-			float speed = hasteCount * p.GetComponent<PlayerBuff> ().amount * 40f;
+			float speed = hasteCount * p.GetComponent<PlayerBuff> ().amount * 15f;
 			pMovement.SpeedBoost (Vector2.zero, speed);
 			int counter = hasteCount;
 			for (int i = 0; i < counter; i++) {

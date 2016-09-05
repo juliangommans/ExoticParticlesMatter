@@ -1,0 +1,302 @@
+fileFormatVersion: 2
+guid: 6361fdaf26cef48149b4162a3f552142
+timeCreated: 1473034355
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ParticleAnimation_0
+    21300002: ParticleAnimation_1
+    21300004: ParticleAnimation_2
+    21300006: ParticleAnimation_3
+    21300008: ParticleAnimation_4
+    21300010: ParticleAnimation_5
+    21300012: ParticleAnimation_6
+    21300014: ParticleAnimation_7
+    21300016: ParticleAnimation_8
+    21300018: ParticleAnimation_9
+    21300020: ParticleAnimation_10
+    21300022: ParticleAnimation_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 64
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: ParticleAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 260
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -58.5, y: 63.5}
+        - {x: -63.5, y: 62.5}
+        - {x: -63.5, y: -53.5}
+        - {x: -34.5, y: -63.5}
+        - {x: 42.5, y: -63.5}
+        - {x: 63.5, y: -42.5}
+        - {x: 63.5, y: 48.5}
+        - {x: 54.5, y: 63.5}
+    - name: ParticleAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 260
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29.5, y: 63.5}
+        - {x: -63.5, y: 40.5}
+        - {x: -63.5, y: -51.5}
+        - {x: -40.5, y: -63.5}
+        - {x: 58.5, y: -63.5}
+        - {x: 63.5, y: -56.5}
+        - {x: 63.5, y: 33.5}
+        - {x: 50.5, y: 63.5}
+    - name: ParticleAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 260
+        width: 128
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -60, y: 63.5}
+        - {x: -64, y: 59.5}
+        - {x: -64, y: -37.5}
+        - {x: -52, y: -63.5}
+        - {x: 32, y: -63.5}
+        - {x: 64, y: -36.5}
+        - {x: 64, y: 54.5}
+        - {x: 41, y: 63.5}
+    - name: ParticleAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 260
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -47.5, y: 63.5}
+        - {x: -63.5, y: 58.5}
+        - {x: -63.5, y: -51.5}
+        - {x: -50.5, y: -63.5}
+        - {x: 33.5, y: -63.5}
+        - {x: 63.5, y: -49.5}
+        - {x: 63.5, y: 29.5}
+        - {x: 35.5, y: 63.5}
+    - name: ParticleAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 129
+        width: 127
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63.5, y: 64}
+        - {x: -63.5, y: -33}
+        - {x: -54.5, y: -64}
+        - {x: 37.5, y: -64}
+        - {x: 63.5, y: -35}
+        - {x: 63.5, y: 64}
+    - name: ParticleAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 129
+        width: 127
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44.5, y: 64}
+        - {x: -63.5, y: 50}
+        - {x: -63.5, y: -34}
+        - {x: -45.5, y: -64}
+        - {x: 54.5, y: -64}
+        - {x: 57.5, y: -63}
+        - {x: 63.5, y: -36}
+        - {x: 63.5, y: 40}
+        - {x: 37.5, y: 64}
+    - name: ParticleAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 129
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42, y: 64}
+        - {x: -29, y: 64}
+        - {x: -59, y: 39}
+        - {x: -64, y: 25}
+        - {x: -64, y: -27}
+        - {x: -42, y: -60}
+        - {x: -27, y: -64}
+        - {x: 37, y: -64}
+        - {x: 60, y: -48}
+        - {x: 64, y: -29}
+        - {x: 64, y: 34}
+    - name: ParticleAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 129
+        width: 127
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42.5, y: 64}
+        - {x: -31.5, y: 64}
+        - {x: -63.5, y: 50}
+        - {x: -63.5, y: -37}
+        - {x: -37.5, y: -64}
+        - {x: 31.5, y: -64}
+        - {x: 39.5, y: -62}
+        - {x: 63.5, y: -29}
+        - {x: 63.5, y: 28}
+        - {x: 59.5, y: 49}
+    - name: ParticleAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29.5, y: 63.5}
+        - {x: -63.5, y: 39.5}
+        - {x: -63.5, y: -36.5}
+        - {x: -48.5, y: -63.5}
+        - {x: 46.5, y: -63.5}
+        - {x: 50.5, y: -62.5}
+        - {x: 63.5, y: -30.5}
+        - {x: 63.5, y: 34.5}
+        - {x: 38.5, y: 63.5}
+    - name: ParticleAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 0
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63.5, y: 63.5}
+        - {x: -63.5, y: -63.5}
+        - {x: 63.5, y: -63.5}
+        - {x: 63.5, y: 53.5}
+        - {x: 45.5, y: 63.5}
+    - name: ParticleAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 128
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 59, y: 51.5}
+        - {x: 37, y: 63.5}
+        - {x: -59, y: 63.5}
+        - {x: -64, y: 42.5}
+        - {x: -64, y: -47.5}
+        - {x: -34, y: -63.5}
+        - {x: 26, y: -63.5}
+        - {x: 43, y: -58.5}
+        - {x: 64, y: -34.5}
+        - {x: 64, y: 29.5}
+    - name: ParticleAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 0
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31.5, y: 63.5}
+        - {x: -48.5, y: 63.5}
+        - {x: -63.5, y: 52.5}
+        - {x: -63.5, y: -42.5}
+        - {x: -51.5, y: -63.5}
+        - {x: 52.5, y: -63.5}
+        - {x: 63.5, y: -41.5}
+        - {x: 63.5, y: 47.5}
+        - {x: 47.5, y: 60.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

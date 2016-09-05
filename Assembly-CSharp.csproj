@@ -49,6 +49,9 @@
      <Compile Include="Assets\Scripts\GameManageScripts\DragLineDrawer.cs" />
      <Compile Include="Assets\Scripts\GameManageScripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\EnergyTrap.cs" />
+     <Compile Include="Assets\Scripts\GroundTriggers\FloorEffects\DisableRegen.cs" />
+     <Compile Include="Assets\Scripts\GroundTriggers\FloorEffects\FloorTriggers.cs" />
+     <Compile Include="Assets\Scripts\GroundTriggers\FloorEffects\SlowPlayer.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\GravityWell.cs" />
      <Compile Include="Assets\Scripts\GroundTriggers\SpeedBoostPanel.cs" />
      <Compile Include="Assets\Scripts\LevelScripts\LevelManager.cs" />
