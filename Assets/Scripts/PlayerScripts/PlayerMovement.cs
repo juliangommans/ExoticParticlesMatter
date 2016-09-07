@@ -48,11 +48,17 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void CalculateNewMotion (){
 		switch (playerEnergy.energy) {
+			case 0:
+				cost = 0;
+				forceOutput = 0f;
+				break;
 			case 1:
 				forceOutput = 225f;
+				cost = 1;
 				break;
 			case 2:
 				forceOutput = 450f;
+				cost = 2;
 				break;
 		}
 	}

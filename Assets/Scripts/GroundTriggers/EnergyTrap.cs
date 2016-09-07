@@ -15,7 +15,7 @@ public class EnergyTrap : MonoBehaviour {
 		yield return new WaitForSeconds(0.03f);
 		other.attachedRigidbody.velocity = Vector3.zero;
 		other.attachedRigidbody.angularVelocity = 0f;
-		other.GetComponent<PlayerEnergy> ().energy = 0;
+		other.GetComponent<PlayerEnergy> ().energy = -1;
 		other.GetComponent<PlayerEnergy> ().ableToRegen = false;
 	}
 }

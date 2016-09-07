@@ -9,7 +9,6 @@ public class DisableRegen : FloorTriggers {
 
 	public override void EnableEffect (Collider2D other){
 		other.GetComponent<PlayerEnergy> ().ableToRegen = false;
-		other.GetComponent<PlayerEnergy> ().regenerating = false;
 	}
 
 	public override void DisableEffect (Collider2D other){

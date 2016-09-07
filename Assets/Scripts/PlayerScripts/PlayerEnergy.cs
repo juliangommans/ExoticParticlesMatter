@@ -11,6 +11,7 @@ public class PlayerEnergy : MonoBehaviour {
 	private PlayerAuxillaryParticles playerBuffs;
 
 	public bool isAlive;
+	public bool finished;
 	public bool shielded;
 	public bool invulnerable;
 	public bool regenerating;
@@ -24,27 +25,38 @@ public class PlayerEnergy : MonoBehaviour {
 			maxEnergy = 10;
 		}
 		ableToRegen = true;
-		regenTimer = 10f;
+		regenTimer = 6f;
 		invulnerable = false;
 		shielded = false;
 		isAlive = true;
+		finished = false;
 		energySlider = GameObject.Find("HealthBar").GetComponent<Slider> ();
 		energy = maxEnergy;
 		energySlider.maxValue = maxEnergy;
 	}
 
 	void Update(){
-		if (energy <= 0) {
-			energy = 0;
-			Debug.Log ("you dead sorry :(");
-			isAlive = false;
+		// If you take damage that reduces you below total energy remaining = you dead;
+		if (energy < 0) {
+			Dead ();
 		}
+		// If you're unable to regen and have no energy... you dead;
+		if (energy == 0 && !ableToRegen) {
+			Dead ();
+		}
+		// probably unnessecary, but a cover for if you end up not alive with energy to spare
 		if (energy > 0 && !isAlive) {
 			isAlive = true;
 		}
+		// HealthBar
 		energySlider.value = energy;
+		// Regeneration logic
 		if (energy < maxEnergy && ableToRegen && !regenerating) {
-			StartCoroutine (Regeneration());
+			StartCoroutine ("Regeneration");
+		}
+		if (!ableToRegen && regenerating) {
+			StopCoroutine ("Regeneration");
+			regenerating = false;
 		}
 	}
 
@@ -57,7 +69,7 @@ public class PlayerEnergy : MonoBehaviour {
 	private IEnumerator Regeneration () {
 		regenerating = true;
 		energy -= 1; // I am adding this because it immediately adds one.
-		while (energy <= maxEnergy && ableToRegen) {
+		while (energy <= maxEnergy && ableToRegen && regenerating) {
 			ChangeEnergy (1, "regen");
 			yield return new WaitForSeconds (regenTimer);
 		}
@@ -68,17 +80,27 @@ public class PlayerEnergy : MonoBehaviour {
 	}
 
 	public void ChangeEnergy(int amount, string source){
-		if (shielded && source == "Damage") {
-			playerBuffs.RemoveParticle ("shield");
-		} else {
-			if (invulnerable && source == "Damage") {
-				//do nothing
-			}else{
-				energy += amount;
-				if (energy >= maxEnergy) {
-					energy = maxEnergy;
+		if (isAlive) {
+			if (shielded && source == "Damage") {
+				playerBuffs.RemoveParticle ("shield");
+			} else {
+				if (invulnerable && source == "Damage") {
+					//do nothing
+				} else {
+					energy += amount;
+					if (energy >= maxEnergy) {
+						energy = maxEnergy;
+					}
 				}
 			}
 		}
+	}
+
+	private void Dead(){
+		energy = 0;
+		Debug.Log ("you dead sorry :(");
+		isAlive = false;
+		ableToRegen = false;
+		regenerating = false;
 	}
 }

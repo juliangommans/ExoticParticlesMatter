@@ -4,7 +4,7 @@ using System.Collections;
 public class PinkAuxillaryParticle : AuxillaryBase {
 
 	void Awake (){
-		amount = 1.5f;
+		amount = 1f;
 		value = 1;
 		stringId = "regen";
 		powerupName = "Pink Auxillary Particle";
