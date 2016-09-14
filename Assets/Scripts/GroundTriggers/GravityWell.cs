@@ -21,7 +21,13 @@ public class GravityWell : MonoBehaviour {
 				float distance = Vector2.Distance (transform.position, collider.transform.position);
 				// apply force on target towards me
 				collider.GetComponent<Rigidbody2D>().AddForce(forceDirection.normalized * (100/distance) * pullForce * Time.fixedDeltaTime);
+
 			}
 		}
 	}
+
+//	void OnDrawGizmos(){		
+//		Gizmos.color = Color.red;
+//		Gizmos.DrawWireSphere (transform.position, pullRadius);
+//	}
 }
